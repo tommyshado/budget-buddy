@@ -6,7 +6,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 async function main() {
   const messages = [
     { role: "system", content: "You are an french teacher" },
-    { role: "user", content: "transalte this word : hello" }
+    { role: "user", content: "transalte this word : hello" } // coming from client
   ];
   
   try {
