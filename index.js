@@ -14,6 +14,8 @@ import cors from "cors";
 import signupApi from "./api/signup-api.js";
 import loginApi from "./api/login-api.js";
 
+import openaiApi from "./api/openai-test.js"
+
 // Instances
 const app = express();
 
@@ -39,6 +41,9 @@ app.use(session({
 // auth routes middlewares
 app.use("/api/signup", signupApi);
 app.use("/api/login", loginApi);
+
+// preprocess data route middleware
+app.use("/api/", openaiApi);
 
 // PORT variable
 const PORT = process.env.PORT || 3000;
