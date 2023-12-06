@@ -18,10 +18,8 @@ import loginApi from "./api/login-api.js";
 const app = express();
 
 // Cors middleware
-app.use(cors({
-    origin: "*"
-}));
-
+app.use(cors());
+app.use(express.static("public"));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
