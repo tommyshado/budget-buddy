@@ -20,7 +20,7 @@
         </header>
 
         <div class="container">
-            <div style="background-color: purple" class="row d-flex justify-content-center">
+            <div style="background-color: lightblue" class="row d-flex justify-content-center">
                 <div class="col-12 col-md-8 col-lg-7">
                     <canvas id="pie-chart"></canvas>
                 </div>
@@ -28,79 +28,14 @@
             <br />
             <h4>Expenses</h4>
             <canvas id="sidewaysBarChart"></canvas>
-            <br>
+            <br />
             <center>
                 <a class="btn btn-success btn-sm" href="/expense.html">Track expenses</a>
             </center>
-
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-        <script>
-            // Sample data for the pie chart
-            const pieData = {
-                labels: ["Food", "Fashion", "Household", "Uncategorized"],
-                datasets: [
-                    {
-                        data: [800, 300, 150, 500], // Sample quantities for each fruit
-                        backgroundColor: ["yellow", "purple", "pink", "green"], // Colors for each slice
-                    },
-                ],
-            };
-
-            const pieConfig = {
-                type: "pie",
-                data: pieData,
-                options: {
-                    plugins: {
-                        legend: {
-                            position: "left", // Adjust legend position
-                        },
-                    },
-                },
-            };
-
-            // Assuming you have a canvas element with an id "fruit-chart" in your HTML.
-            const pieElem = document.getElementById("pie-chart").getContext("2d");
-            const pieChart = new Chart(pieElem, pieConfig);
-
-            // *******************************************************
-
-            document.addEventListener('DOMContentLoaded', function () {
-      // Sample data for the bar graph
-      var data = {
-        labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4'],
-        datasets: [{
-          label: 'Sideways Bar Graph',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
-          data: [10, 30, 15, 25],
-        }]
-      };
-
-      var options = {
-        scales: {
-          x: {
-            beginAtZero: true
-          },
-          y: {
-            beginAtZero: true
-          }
-        },
-        indexAxis: 'y', // This makes the chart horizontal
-      };
-
-      // Get the canvas element
-      var ctx = document.getElementById('sidewaysBarChart').getContext('2d');
-
-      // Create the sideways bar chart
-      var sidewaysBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: options
-      });
-    });
-        </script>
+        <script src="js/insights.js" ></script>
     </body>
 </html>
