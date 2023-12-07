@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 text: text,
                 categoryId: id
             };
-
-            axios.post(apiURL, data);
+            console.log(data)
+            // axios.post(apiURL, data);
             
         }).catch((error) => {
             console.error('OCR Error:', error);
