@@ -16,7 +16,11 @@ const budgetBuddy = (db) => {
     };
 
     const categories = async () => {
-        return db.manyOrNone("select * from categories");
+        return db.manyOrNone(
+            `select categories.category_type, count(products.product_id) as product_count
+             from categories left join products ON categories.category_id = products.category_id
+             group by categories.category_type 
+             `);
     };
 
     return {
