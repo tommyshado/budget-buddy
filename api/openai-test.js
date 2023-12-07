@@ -1,7 +1,7 @@
 import { OpenAI } from "openai";
 import "dotenv/config";
 
-import products from "../services/products.js";
+import products from "../services/budgetBuddy.js";
 import db from "../model/db.js";
 
 import { Router } from "express";
@@ -18,10 +18,10 @@ const prompt = chatgptPrompt();
 const productsService = products(db);
 
 // Api routes
-router.post("/preprocessData", (req, res) => {
+router.post("/preprocessData", async (req, res) => {
 	const { text, categoryId } = req.body;
 
-	async function main() {
+	const main = async () => {
 		const messages = [
 			{ role: "system", content: `${prompt.text}` },
 			{ role: "user", content: `${text}` }, // coming from client
@@ -29,31 +29,17 @@ router.post("/preprocessData", (req, res) => {
 
 		try {
 			const completion = await openai.chat.completions.create({ model: "gpt-3.5-turbo", messages });
-      		const structuredData = completion.choices[0].message.content; // stores structured data
-
-			let product;
-			let price;
-			console.log("--- ",req.body)
-
-			console.log(structuredData)
+			const structuredData = completion.choices[0].message.content; // stores structured data
 
 			if (Array.isArray(JSON.parse(structuredData))) {
-				console.log("executes")
-				structuredData.forEach(async (result) => {
-					product = result.product;
-					price = result.price;
-					await productsService.createProduct({ product, price, categoryId });
-				});
-
+				for (const product in structuredData) {
+					await productsService.createProduct(structuredData[product].product, structuredData[product].price, categoryId);
+				};
 
 				res.json({
 					status: "success",
 				});
 			};
-
-			res.json({
-				status: "error"
-			});
 
 		} catch (err) {
 			res.json({
@@ -68,11 +54,28 @@ router.post("/preprocessData", (req, res) => {
 
 router.get("/products", async (req, res) => {
 	try {
-		const allProducts = await productsService.all();
+		const allProducts = await productsService.allProducts();
 
 		res.json({
 			status: "success",
 			data: allProducts
+		});
+		
+	} catch (err) {
+		res.json({
+			status: "error",
+			error: err.stack,
+		});
+	};
+});
+
+router.get("/categories", async (req, res) => {
+	try {
+		const categories = await productsService.categories();
+
+		res.json({
+			status: "success",
+			data: categories
 		});
 		
 	} catch (err) {
