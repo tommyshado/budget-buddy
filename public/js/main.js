@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
-    const resultDiv = document.getElementById('result');
 
     // Access the camera
     navigator.mediaDevices.getUserMedia({ video: true })
