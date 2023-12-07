@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 axios.post(apiURL, data).then(()=>{
                 });
                 resultDiv.innerHTML = `Item has been scanned....`;
-                window.location.href = "../js/public/insights.html"
+                window.location.href = "/insights.html"
             }
             // <p>Extracted Text: ${text}</p>
             
