@@ -1,9 +1,10 @@
 axios.get("http://localhost:3000/api/categories").then((result) => {
+    console.log(result.data.data)
     const pieData = {
         labels: result.data.data.map((item) => item.category_type),
         datasets: [
             {
-                data: result.data.data.map((item) => item.), // Sample quantities for each fruit
+                data: result.data.data.map((item) => item.product_count), // Sample quantities for each fruit
                 backgroundColor: ["yellow", "purple", "pink", "green"], // Colors for each slice
             },
         ],
@@ -30,14 +31,14 @@ axios.get("http://localhost:3000/api/categories").then((result) => {
 // *******************************************************
 
 var data = {
-    labels: result.data.data.map((item) => item.product),
+    labels: result.data.data.map((item) => item.category_type),
     datasets: [
         {
             label: "Sideways Bar Graph",
             backgroundColor: "rgba(75, 192, 192, 0.2)",
             borderColor: "rgba(75, 192, 192, 1)",
             borderWidth: 1,
-            data: result.data.data.map((item) => item.price),
+            data: result.data.data.map((item) => item.product_count)
         },
     ],
 };
