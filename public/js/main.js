@@ -25,7 +25,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             { logger: info => console.log(info) }
         ).then(({ data: { text } }) => {
 
-            resultDiv.innerHTML = `<p>Extracted Text: ${text}</p>`;
+            const apiURL = "http://localhost:3000/api/preprocessData";
+            const data = {
+                text: text
+            };
+
+            axios.post(apiURL, data);
             
         }).catch((error) => {
             console.error('OCR Error:', error);
