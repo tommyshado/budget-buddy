@@ -23,13 +23,8 @@ const loginUsers = (db) => {
         };
     };
 
-    const loginUser = async (user_id, req) => {
-        req.session.userId = user_id;
-    };
-
     return {
         checkUser,
-        loginUser
     };
 };
 

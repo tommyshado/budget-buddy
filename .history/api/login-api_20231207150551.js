@@ -1,22 +1,25 @@
 import { Router } from "express";
 import db from "../model/db.js";
 import loginService from "../services/login-users.js";
-import dotenv from 'dotenv';
-import { login } from "../validate.js";
+
+// validate.js module
+import {login }from "../validate.js";
+
+// Bcrypt import
 import bcrypt from "bcrypt";
+
+// JWT import
 import jwt from "jsonwebtoken";
 
-dotenv.config();
-
+// Instances
 const loginRouter = Router();
 const LoginService = loginService(db);
 
+// Routes
 loginRouter.post("/user", async (req, res) => {
     try {
         const { error } = login(req.body);
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
+        if (error) return res.status(400).json({ error: error.details[0].message });
 
         const user = {
             usernameOrEmail: req.body.usernameOrEmail.toLowerCase(),
@@ -60,5 +63,6 @@ loginRouter.post("/user", async (req, res) => {
         });
     }
 });
+
 
 export default loginRouter;
