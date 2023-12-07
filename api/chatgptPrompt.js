@@ -14,9 +14,9 @@ const chatgptPrompt = () => {
                 be in south african rands. So if you are sure that the provided prices are in any other 
                 currency please convert them to south african rands. For example, the data should look like the following:
                 [
-                  { 'product': 'Apples', 'price': 15.99 },
-                  { 'product': 'Milk', 'price': 12.50 },
-                  { 'product': 'Bread', 'price': 10.99 }
+                  { "product": "Apples", "price": 15.99 },
+                  { "product": "Milk", "price": 12.50 },
+                  { "product": "Bread", "price": 10.99 }
                 ]. make sure to use single quotes instead of double quotes.
             `;
   return {

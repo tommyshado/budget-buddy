@@ -29,13 +29,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 const apiURL = "http://localhost:3000/api/preprocessData";
                 const data = {
                     text: text,
-                    categoryId: 4
+                    categoryId: 1
                 };
     
                 axios.post(apiURL, data).then(()=>{
                 });
                 resultDiv.innerHTML = `Item has been scanned....`;
-                window.location.href = "/insights.html"
+                window.location.href = "../js/public/insights.html"
             }
             // <p>Extracted Text: ${text}</p>
             
