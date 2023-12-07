@@ -1,52 +1,67 @@
-import { OpenAI } from 'openai';
+import { OpenAI } from "openai";
 import "dotenv/config";
 
-import products from '../services/products.js';
+import products from "../services/products.js";
 import db from "../model/db.js";
 
 import { Router } from "express";
 
 // chagpt prompt import
-import chatgptPrompt from "../api/chatgptPrompt.js";
+import chatgptPrompt from "./chatgptPrompt.js";
 
 // Instances
 const router = Router();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const prompt = chatgptPrompt();
 
-// Use instance to create a product
-const Products = products(db);
+// Services import
+const productsService = products(db);
 
 // Api routes
 router.post("/preprocessData", (req, res) => {
-  const { text, categoryId } = req.body;
+	const { text, categoryId } = req.body;
 
-  async function main() {
-    const messages = [
-      { role: "system", content: `${prompt.text}` },
-      { role: "user", content: `${text}` } // coming from client
-    ];
-    
-    try {
-      const completion = await openai.chat.completions.create({ model: "gpt-3.5-turbo", messages });
-      const structuredData = completion.choices[0].message.content; // stores structured data
-      
-      // Loop over the length of the structuredData variable then...
-        // insert key value pairs data into the products database table.
+	async function main() {
+		const messages = [
+			{ role: "system", content: `${prompt.text}` },
+			{ role: "user", content: `${text}` }, // coming from client
+		];
 
-      res.json({
-        status: "success"
-      });
+		try {
+			const completion = await openai.chat.completions.create({ model: "gpt-3.5-turbo", messages });
+      		const structuredData = completion.choices[0].message.content; // stores structured data
 
-    } catch (err) {
-      res.json({
-          status: "error",
-          error: err.stack
-      })
-    };
-  };
-  
-  main();
+			let product;
+			let price;
+
+			if (Array.isArray(structuredData)) {
+
+				structuredData.forEach((result) => {
+					product = result.product;
+					price = result.price;
+				});
+
+				// create a product
+				await productsService.createProduct({ product, price, categoryId });
+
+				res.json({
+					status: "success",
+				});
+			};
+
+			res.json({
+				status: "error"
+			});
+
+		} catch (err) {
+			res.json({
+				status: "error",
+				error: err.stack,
+			});
+		};
+	};
+
+	main();
 });
 
 export default router;
