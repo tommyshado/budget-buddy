@@ -3,6 +3,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
 
+    // get the references to the dropdown value
+    const dropdown = document.getElementById("categories");
+
+    // Id for category
+    let id;
+
+    // Event
+    dropdown.addEventListener("change", () => {
+        id = dropdown.value;
+    });
+
     // Access the camera
     navigator.mediaDevices.getUserMedia({ video: true })
         .then((stream) => {
@@ -26,7 +37,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             const apiURL = "http://localhost:3000/api/preprocessData";
             const data = {
-                text: text
+                text: text,
+                categoryId: id
             };
 
             axios.post(apiURL, data);

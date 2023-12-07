@@ -16,15 +16,21 @@
                 <video id="video" style="width: 100%;height: auto;" autoplay></video>
                 <canvas id="canvas" style="width: 100%;height: auto;display:none;"></canvas>
                 <br>
-                <select name="categories" id="categories">
-                    <option value="">Select Category</option>
-                    <option value="1">Food</option>
-                    <option value="2">Fashion</option>
-                    <option value="3">Household</option>
-                    <option value="4">Uncategorised</option>
-                </select>
 
-                <center><button class="btn btn-primary" id="captureBtn">Capture Image</button> </center>
+                <center>
+                    <!-- dropdown -->
+                    <select name="categories" id="categories">
+                        <option value="">Select Category</option>
+                        <option value="1">Food</option>
+                        <option value="2">Fashion</option>
+                        <option value="3">Household</option>
+                        <option value="4">Uncategorised</option>
+                    </select>
+                    <br>
+
+                    <!-- button -->
+                    <button class="btn btn-primary" id="captureBtn">Capture Image</button>
+                </center>
                 
                 <div id="result"></div>
             </div>
