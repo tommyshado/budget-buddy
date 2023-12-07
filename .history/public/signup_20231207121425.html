@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    <div class="loginContainer">
+        <div>
+            <div class="heading">
+                <h1><strong>Signup Page</strong></h1>
+            </div>
+
+            <!-- message section -->
+            <div class="message"></div>
+
+            <div class="signupForm">
+                <!-- Username -->
+                <div>
+                    <label for="username"><strong>Username</strong></label>
+                    <div>
+                        <input name="username" class="username" type="text" placeholder="Enter your username" required />
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email"><strong>Email</strong></label>
+                    <div>
+                        <input name="email" class="email" type="email" placeholder="Enter your email" required />
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password"><strong>Password</strong></label>
+                    <div>
+                        <input name="password" class="password" type="password" placeholder="Enter your password" required />
+                    </div>
+                </div>
+
+                <!-- Spending Categories -->
+                <div>
+                    <label for="categories"><strong>Spending Categories</strong></label>
+                    <div>
+                        <select name="categories" class="categories" multiple required>
+                            <option value="groceries">Groceries</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="dining">Dining Out</option>
+                            <option value="entertainment">Entertainment</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Spending Limit -->
+                <div>
+                    <label for="spendingLimit"><strong>Spending Limit</strong></label>
+                    <div>
+                        <input name="spendingLimit" class="spendingLimit" type="number" placeholder="Enter your monthly spending limit" required />
+                    </div>
+                </div>
+
+                <!-- Financial Goals -->
+                <div>
+                    <label for="financialGoals"><strong>Financial Goals</strong></label>
+                    <div>
+                        <textarea name="financialGoals" class="financialGoals" placeholder="Describe your financial goals" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Signup Button -->
+                <div>
+                    <button type="button" class="signupBtn"><strong>Signup</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js script tags -->
+    <script src="./js/signup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

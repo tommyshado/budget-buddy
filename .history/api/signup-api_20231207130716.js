@@ -16,12 +16,11 @@ signupRouter.post("/user", async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         const user = {
-            username: req.body.username,
-            email: req.body.email,
+            usernameOrEmail: req.body.usernameOrEmail,
             password: hashedPassword,
             categories: req.body.categories,
             spendingLimit: req.body.spendingLimit,
-          
+            financialGoals: req.body.financialGoals
         };
 
         await SignupService.createUser(user);

@@ -28,17 +28,6 @@ CREATE TABLE user_spending_limits (
 
 
 -- table for all the products
-CREATE TABLE products (
-    product_id SERIAL PRIMARY KEY,
-    product TEXT NOT NULL,
-    price NUMERIC,
-
-    -- foreign keys
-    category_id INT NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id)
-);
-
-
 CREATE TABLE user_products (
     user_id INT NOT NULL,
     product_id INT NOT NULL,
@@ -46,7 +35,6 @@ CREATE TABLE user_products (
     FOREIGN KEY (user_id) REFERENCES user_table(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
-
 
 CREATE TABLE purchases (
     purchase_id SERIAL PRIMARY KEY,
@@ -57,3 +45,4 @@ CREATE TABLE purchases (
     FOREIGN KEY (user_id) REFERENCES user_table(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
+

@@ -21,7 +21,7 @@ signupRouter.post("/user", async (req, res) => {
             password: hashedPassword,
             categories: req.body.categories,
             spendingLimit: req.body.spendingLimit,
-          
+            financialGoals: req.body.financialGoals
         };
 
         await SignupService.createUser(user);

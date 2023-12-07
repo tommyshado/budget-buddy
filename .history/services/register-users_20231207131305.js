@@ -4,12 +4,12 @@ const registerUsers = (db) => {
         return await db.manyOrNone("SELECT * FROM user_table");
     };
 
-    const createUser = async ({ username, email, password, categories, spendingLimit }) => {
+    const createUser = async ({ username, email, password, categories }) => {
         // Start transaction
         await db.tx(async t => {
             // Insert user into user_table
-            const userQuery = `INSERT INTO user_table (username, email, password_hash, spending_limit) VALUES ($1, $2, $3, $4) RETURNING user_id`;
-            const userData = [username.toLowerCase(), email.toLowerCase(), password, spendingLimit];
+            const userQuery = `INSERT INTO user_table (username, email, password_hash) VALUES ($1, $2, $3) RETURNING user_id`;
+            const userData = [username.toLowerCase(), email.toLowerCase(), password];
             const userId = await t.one(userQuery, userData);
 
             // Insert categories into user_categories
@@ -19,6 +19,7 @@ const registerUsers = (db) => {
 
             await t.batch(categoryQueries);
         });
+
         // Transaction is automatically committed here
     };
 

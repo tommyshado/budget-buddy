@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+    <div class="loginContainer">
+        <div>
+            <div class="heading">
+                <h1><strong>Signup Page</strong></h1>
+            </div>
+
+            <!-- message section -->
+            <div class="message"></div>
+
+            <div class="signupForm">
+                <!-- Username -->
+                <div>
+                    <label for="username"><strong>Username</strong></label>
+                    <div>
+                        <input name="username" class="username" type="text" placeholder="Enter your username" required />
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email"><strong>Email</strong></label>
+                    <div>
+                        <input name="email" class="email" type="email" placeholder="Enter your email" required />
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password"><strong>Password</strong></label>
+                    <div>
+                        <input name="password" class="password" type="password" placeholder="Enter your password" required />
+                    </div>
+                </div>
+
+                <!-- Spending Categories -->
+                <div>
+                    <label><strong>Spending Categories</strong></label>
+                    <div>
+                        <input type="checkbox" id="groceries" name="categories" value="groceries">
+                        <label for="groceries">Groceries</label><br>
+                        
+                        <input type="checkbox" id="utilities" name="categories" value="utilities">
+                        <label for="utilities">Utilities</label><br>
+                        
+                        <input type="checkbox" id="dining" name="categories" value="dining">
+                        <label for="dining">Dining Out</label><br>
+                        
+                        <input type="checkbox" id="entertainment" name="categories" value="entertainment">
+                        <label for="entertainment">Entertainment</label><br>
+                        
+                        <input type="checkbox" id="travel" name="categories" value="travel">
+                        <label for="travel">Travel</label><br>
+                        
+                        <input type="checkbox" id="education" name="categories" value="education">
+                        <label for="education">Education</label><br>
+                        
+                        <input type="checkbox" id="healthcare" name="categories" value="healthcare">
+                        <label for="healthcare">Healthcare</label><br>
+                        
+                        <!-- Add more checkboxes as needed -->
+                    </div>
+                </div>
+
+                <!-- Spending Limit -->
+                <div>
+                    <label for="spendingLimit"><strong>Spending Limit</strong></label>
+                    <div>
+                        <input name="spendingLimit" class="spendingLimit" type="number" placeholder="Enter your monthly spending limit" required />
+                    </div>
+                </div>
+
+                <!-- Financial Goals -->
+                <div>
+                    <label for="financialGoals"><strong>Financial Goals</strong></label>
+                    <div>
+                        <textarea name="financialGoals" class="financialGoals" placeholder="Describe your financial goals" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Signup Button -->
+                <div>
+                    <button type="button" class="signupBtn"><strong>Signup</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- js script tags -->
+    <script src="./js/signup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>
+

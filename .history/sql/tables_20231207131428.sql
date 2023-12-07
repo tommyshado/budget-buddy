@@ -37,23 +37,3 @@ CREATE TABLE products (
     category_id INT NOT NULL,
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
-
-
-CREATE TABLE user_products (
-    user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    PRIMARY KEY (user_id, product_id),
-    FOREIGN KEY (user_id) REFERENCES user_table(user_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
-
-
-CREATE TABLE purchases (
-    purchase_id SERIAL PRIMARY KEY,
-    user_id INT,
-    product_id INT,
-    purchase_date TIMESTAMP,
-    quantity INT,
-    FOREIGN KEY (user_id) REFERENCES user_table(user_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
