@@ -1,9 +1,9 @@
-axios.get("http://localhost:3000/api/products").then((result) => {
+axios.get("http://localhost:3000/api/categories").then((result) => {
     const pieData = {
-        labels: result.data.data.map((item) => item.product),
+        labels: result.data.data.map((item) => item.category_type),
         datasets: [
             {
-                data: result.data.data.map((item) => item.price), // Sample quantities for each fruit
+                data: result.data.data.map((item) => item.), // Sample quantities for each fruit
                 backgroundColor: ["yellow", "purple", "pink", "green"], // Colors for each slice
             },
         ],
