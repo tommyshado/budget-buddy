@@ -48,11 +48,13 @@ loginRouter.post("/user", async (req, res) => {
         // Create a session for the logged-in user
         req.session.userId = user_id;
 
+        const userDashboardUrl = `/user/${user_id}/dashboard`
+
         res.status(200).json({
             status: "Logged in",
             token: token,
             loggedUserId: user_id,
-            redirectUrl: 'insights.html' // Redirecting to insights.html
+            redirectUrl: userDashboardUrl 
         });
     } catch (err) {
         res.status(500).json({

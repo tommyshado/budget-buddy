@@ -52,7 +52,7 @@ loginRouter.post("/user", async (req, res) => {
             status: "Logged in",
             token: token,
             loggedUserId: user_id,
-            redirectUrl: 'insights.html' // Redirecting to insights.html
+            redirectUrl: userDashboardUrl 
         });
     } catch (err) {
         res.status(500).json({
