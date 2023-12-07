@@ -1,14 +1,11 @@
 document.querySelector(".loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const usernameOrEmail = document.querySelector(".loginForm input[name='usernameOrEmail']");
-    const password = document.querySelector(".loginForm input[name='password']");
-    const message = document.querySelector(".message");
-
     const user = {
         usernameOrEmail: usernameOrEmail.value,
         password: password.value
     };
+
     axios.post("/api/login/user", user)
         .then(result => {
             const { error, token, loggedUserId } = result.data;
