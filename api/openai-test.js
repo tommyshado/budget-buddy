@@ -64,4 +64,21 @@ router.post("/preprocessData", (req, res) => {
 	main();
 });
 
+router.get("/products", async (req, res) => {
+	try {
+		const allProducts = await productsService.all();
+
+		res.json({
+			status: "success",
+			data: allProducts
+		});
+		
+	} catch (err) {
+		res.json({
+			status: "error",
+			error: err.stack,
+		});
+	};
+});
+
 export default router;

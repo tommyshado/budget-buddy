@@ -1,4 +1,8 @@
 const products = (db) => {
+    const all = () => {
+        return db.manyOrNone("select * from products");
+    };
+
     const createProduct = async ({ product, price, categoryId }) => {
         const data = [
             product,
@@ -12,6 +16,7 @@ const products = (db) => {
     };
 
     return {
+        all,
         createProduct,
     };
 };
