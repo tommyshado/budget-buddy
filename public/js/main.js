@@ -2,17 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
     const captureBtn = document.getElementById('captureBtn');
-
-    // get the references to the dropdown value
-    const dropdown = document.getElementById("categories");
-
-    // Id for category
-    let id;
-
-    // Event
-    dropdown.addEventListener("change", () => {
-        id = dropdown.value;
-    });
+    const resultDiv = document.getElementById('result');
 
     // Access the camera
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -35,14 +25,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
             { logger: info => console.log(info) }
         ).then(({ data: { text } }) => {
 
-            const apiURL = "http://localhost:3000/api/preprocessData";
-            const data = {
-                text: text,
-                categoryId: id
-            };
+            if(text){
+                const apiURL = "http://localhost:3000/api/preprocessData";
+                const data = {
+                    text: text,
+                    categoryId: 1
+                };
+    
+                axios.post(apiURL, data);
+            }
 
-            axios.post(apiURL, data);
-            
+            resultDiv.innerHTML = `<p>Extracted Text: ${text}</p>`;
         }).catch((error) => {
             console.error('OCR Error:', error);
         });

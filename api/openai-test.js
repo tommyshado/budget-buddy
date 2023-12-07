@@ -33,16 +33,18 @@ router.post("/preprocessData", (req, res) => {
 
 			let product;
 			let price;
+			console.log("--- ",req.body)
 
-			if (Array.isArray(structuredData)) {
+			console.log(structuredData)
 
-				structuredData.forEach((result) => {
+			if (Array.isArray(JSON.parse(structuredData))) {
+				console.log("executes")
+				structuredData.forEach(async (result) => {
 					product = result.product;
 					price = result.price;
+					await productsService.createProduct({ product, price, categoryId });
 				});
 
-				// create a product
-				await productsService.createProduct({ product, price, categoryId });
 
 				res.json({
 					status: "success",
