@@ -9,15 +9,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Process form data
             formData.forEach((value, key) => {
-                if (key.endsWith('[]')) {
-                    // Handle array fields like categories
-                    let actualKey = key.slice(0, -2); // Remove '[]' from key
-                    if (!data[actualKey]) {
-                        data[actualKey] = [];
+                // Check if the key already exists
+                if (data.hasOwnProperty(key)) {
+                    // If it's not an array, convert it to an array
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
                     }
-                    data[actualKey].push(value);
+                    data[key].push(value);
                 } else {
-                    // Handle non-array fields
+                    // If the key doesn't exist, just add it
                     data[key] = value;
                 }
             });

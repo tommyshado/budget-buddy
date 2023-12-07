@@ -5,27 +5,12 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
 
             const formData = new FormData(signupForm);
-            const data = {};
-
-            // Process form data
-            formData.forEach((value, key) => {
-                if (key.endsWith('[]')) {
-                    // Handle array fields like categories
-                    let actualKey = key.slice(0, -2); // Remove '[]' from key
-                    if (!data[actualKey]) {
-                        data[actualKey] = [];
-                    }
-                    data[actualKey].push(value);
-                } else {
-                    // Handle non-array fields
-                    data[key] = value;
-                }
-            });
+            const data = Object.fromEntries(formData.entries());
 
             console.log('Form data:', data); // Log form data
 
             try {
-                const response = await axios.post('/api/signup/user', data);
+                const response = await axios.post('/api/signup/user', data); // Make sure the URL matches your API endpoint
                 console.log('Response:', response); // Log response
 
                 if (response.status === 201) {

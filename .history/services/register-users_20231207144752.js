@@ -11,7 +11,7 @@ const registerUsers = (db) => {
             const userQuery = `INSERT INTO user_table (username, email, password_hash, spending_limit) VALUES ($1, $2, $3, $4) RETURNING user_id`;
             const userData = [username.toLowerCase(), email.toLowerCase(), password, spendingLimit];
             const user = await t.one(userQuery, userData);
-            req.session.userId = user.user_id;
+
             // Convert category names to IDs
             const categoryIds = await Promise.all(categories.map(async categoryName => {
                 const category = await t.oneOrNone('SELECT category_id FROM categories WHERE category_type = $1', categoryName);

@@ -1,4 +1,4 @@
-axios.get("/api/categories").then((result) => {
+axios.get("http://localhost:3000/api/categories").then((result) => {
     console.log(result.data.data)
     const pieData = {
         labels: result.data.data.map((item) => item.category_type),
