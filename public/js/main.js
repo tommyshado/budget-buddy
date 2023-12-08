@@ -29,10 +29,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 const apiURL = "/api/preprocessData";
                 const data = {
                     text: text,
-                    categoryId: 1
+                    categoryId: 3
                 };
     
-                resultDiv.innerHTML = `<p>Extracted Text: ${text}</p>`;
                 axios.post(apiURL, data).then(()=>{
 
                     window.location.href = "/insights.html"
