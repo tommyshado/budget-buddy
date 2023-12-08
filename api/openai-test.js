@@ -109,4 +109,39 @@ router.get("/categories", async (req, res) => {
     }
 });
 
+router.get("/categories/user", async (req, res) => {
+
+    try {
+        const categories = await productsService.categoryUser();
+
+        res.json({
+            status: "success",
+            data: categories,
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            error: err.stack,
+        });
+    }
+});
+
+router.get("/products/user", async (req, res) => {
+
+    try {
+        const categories = await productsService.productsUser();
+
+        res.json({
+            status: "success",
+            data: categories,
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            error: err.stack,
+        });
+    }
+});
+
+
 export default router;
