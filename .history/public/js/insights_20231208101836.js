@@ -71,7 +71,7 @@ axios.get('/api/products/user', {
     }
 }).then((response) => {
     const userProducts = response.data.data;
-    console.log(userProducts)
+
     // Process the data for chart display
     updatePieChart(userProducts);
     updateBarChart(userProducts);
