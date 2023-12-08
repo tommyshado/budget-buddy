@@ -66,9 +66,8 @@ router.get("/advice", async (req, res) => {
             status: "success",
             data: advice,
         });
-        res.json({
-            status: "success",
-        });
+
+        
     } catch (err) {
         console.log(err);
         res.json({

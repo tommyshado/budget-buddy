@@ -6,7 +6,9 @@ const budgetAdvicePrompt = () => {
               data for a person who needs help with budgeting and general financial tips
               the data I am going to give you is from a database.The data shows products 
               that the person spends on and the categories these products fall into. Share 
-              only the advice and tips and keep it to less than 2 paragraphs.
+              only the advice and tips and keep it 1 paragraphs. Advice them 
+              like you are talking to them directly! Say only the things that matter. be formal
+              
               
               `;
     return {
