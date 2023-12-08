@@ -112,11 +112,11 @@ router.get("/categories", async (req, res) => {
 router.get("/categories/user", async (req, res) => {
 
     try {
-        const categories = await productsService.categoryUser();
+        const categoriesUser = await productsService.categoryUser();
 
         res.json({
             status: "success",
-            data: categories,
+            data: categoriesUser,
         });
     } catch (err) {
         res.json({
@@ -129,11 +129,11 @@ router.get("/categories/user", async (req, res) => {
 router.get("/products/user", async (req, res) => {
 
     try {
-        const categories = await productsService.productsUser();
+        const userProducts = await productsService.productsUser();
 
         res.json({
             status: "success",
-            data: categories,
+            data: userProducts,
         });
     } catch (err) {
         res.json({
