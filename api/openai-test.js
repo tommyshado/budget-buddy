@@ -11,6 +11,8 @@ import chatgptPrompt from "./chatgptPrompt.js";
 import budgetAdvicePrompt from "./budgetAdvicePrompt.js";
 import session from "express-session";
 
+import verifyToken from "../middlewares/verifyToken.js"
+
 // Instances
 const router = Router();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -109,10 +111,10 @@ router.get("/categories", async (req, res) => {
     }
 });
 
-router.get("/categories/user", async (req, res) => {
+router.get("/categories/user", verifyToken, async (req, res) => {
 
     try {
-        const categoriesUser = await productsService.categoryUser();
+        const categoriesUser = await productsService.categoryUser(req.user.id);
 
         res.json({
             status: "success",
@@ -126,10 +128,9 @@ router.get("/categories/user", async (req, res) => {
     }
 });
 
-router.get("/products/user", async (req, res) => {
-
+router.get("/products/user", verifyToken, async (req, res) => {
     try {
-        const userProducts = await productsService.productsUser();
+        const userProducts = await productsService.productsUser(req.user.id);
 
         res.json({
             status: "success",

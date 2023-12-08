@@ -23,17 +23,17 @@ const budgetBuddy = (db) => {
              `);
     };
 
-    const categoryUser = async () => {
+    const categoryUser = async (user_id) => {
         return db.manyOrNone(`select c.category_type, count(uc.user_id) AS user_count
                               from categories c left join user_categories uc ON c.category_id = uc.category_id
-                              group by c.category_type;
+                              where u.user_id = ${user_id} group by c.category_type;
                               `)
     };
 
-    const productsUser = async () => {
+    const productsUser = async (user_id) => {
         return db.manyOrNone(`select u.user_id, u.username, count(up.product_id) AS product_count
                               from user_table u left join user_products up ON u.user_id = up.user_id
-                              group by u.user_id, u.username;
+                              where u.user_id = ${user_id} group by u.user_id, u.username;
                               `)
     }
 

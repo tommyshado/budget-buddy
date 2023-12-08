@@ -1,5 +1,5 @@
 // the link to your model provided by Teachable Machine export panel
-const URL = "./my_model/";
+const URL = "https://teachablemachine.withgoogle.com/models/zAPA93r9V/";
 
 let model, webcam, labelContainer, maxPredictions;
 
