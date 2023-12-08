@@ -8,6 +8,7 @@ import { Router } from "express";
 
 // chagpt prompt import
 import chatgptPrompt from "./chatgptPrompt.js";
+import session from "express-session";
 
 // Instances
 const router = Router();
@@ -63,6 +64,7 @@ router.get("/products", async (req, res) => {
 });
 
 router.get("/categories", async (req, res) => {
+
     try {
         const categories = await productsService.categories();
 
