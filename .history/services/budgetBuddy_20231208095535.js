@@ -43,19 +43,11 @@ const budgetBuddy = (db) => {
     
 
     const productsUser = async (user_id) => {
-        return db.manyOrNone(`
-            SELECT 
-                p.product,
-                p.price
-            FROM 
-                user_products up
-            JOIN 
-                products p ON up.product_id = p.product_id
-            WHERE 
-                up.user_id = $1;
-        `, [user_id]);
-    };
-    
+        return db.manyOrNone(`select u.user_id, u.username, count(up.product_id) AS product_count
+                              from user_table u left join user_products up ON u.user_id = up.user_id
+                              where u.user_id = ${user_id} group by u.user_id, u.username;
+                              `)
+    }
 
     return {
         allProducts,

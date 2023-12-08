@@ -24,38 +24,18 @@ const budgetBuddy = (db) => {
     };
 
     const categoryUser = async (user_id) => {
-        return db.manyOrNone(`
-            SELECT 
-                c.category_type, 
-                COUNT(p.product_id) AS product_count
-            FROM 
-                categories c
-            LEFT JOIN 
-                products p ON c.category_id = p.category_id
-            LEFT JOIN 
-                user_products up ON p.product_id = up.product_id
-            WHERE 
-                up.user_id = $1
-            GROUP BY 
-                c.category_type;
-        `, [user_id]);
+        return db.manyOrNone(`select c.category_type, count(uc.user_id) AS user_count
+                              from categories c left join user_categories uc ON c.category_id = uc.category_id
+                              where uc.user_id = ${user_id} group by c.category_type;
+                              `)
     };
-    
 
     const productsUser = async (user_id) => {
-        return db.manyOrNone(`
-            SELECT 
-                p.product,
-                p.price
-            FROM 
-                user_products up
-            JOIN 
-                products p ON up.product_id = p.product_id
-            WHERE 
-                up.user_id = $1;
-        `, [user_id]);
-    };
-    
+        return db.manyOrNone(`select u.user_id, u.username, count(up.product_id) AS product_count
+                              from user_table u left join user_products up ON u.user_id = up.user_id
+                              where u.user_id = ${user_id} group by u.user_id, u.username;
+                              `)
+    }
 
     return {
         allProducts,
