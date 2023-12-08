@@ -29,7 +29,7 @@ router.post("/preprocessData", async (req, res) => {
     try {
         const completion = await openai.chat.completions.create({ model: "gpt-3.5-turbo", messages });
         const structuredData = JSON.parse(completion.choices[0].message.content); // stores structured data
-
+        console.log("--- ",structuredData)
         for (const product in structuredData) {
             await productsService.createProduct(structuredData[product].product, structuredData[product].price, categoryId);
         };

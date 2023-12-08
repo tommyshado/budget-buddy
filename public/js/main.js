@@ -32,12 +32,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     categoryId: 1
                 };
     
+                resultDiv.innerHTML = `<p>Extracted Text: ${text}</p>`;
                 axios.post(apiURL, data).then(()=>{
+
+                    window.location.href = "/insights.html"
                 });
-                resultDiv.innerHTML = `Item has been scanned....`;
-                window.location.href = "/insights.html"
             }
-            // <p>Extracted Text: ${text}</p>
+            // 
             
         }).catch((error) => {
             console.error('OCR Error:', error);
