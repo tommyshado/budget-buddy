@@ -26,7 +26,7 @@ const budgetBuddy = (db) => {
     const categoryUser = async (user_id) => {
         return db.manyOrNone(`select c.category_type, count(uc.user_id) AS user_count
                               from categories c left join user_categories uc ON c.category_id = uc.category_id
-                              where u.user_id = ${user_id} group by c.category_type;
+                              where uc.user_id = ${user_id} group by c.category_type;
                               `)
     };
 
