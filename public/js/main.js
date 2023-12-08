@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ).then(({ data: { text } }) => {
 
             if(text){
-                const apiURL = "http://localhost:3000/api/preprocessData";
+                const apiURL = "/api/preprocessData";
                 const data = {
                     text: text,
                     categoryId: 1
