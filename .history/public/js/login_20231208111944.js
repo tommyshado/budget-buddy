@@ -12,7 +12,6 @@ document.querySelector(".loginForm").addEventListener("submit", function(event) 
 
     axios.post("/api/login/user", user)
         .then(result => {
-            console.log(result)
             const { error, token, loggedUserId, redirectUrl } = result.data;
 
             if (error) {
@@ -22,7 +21,6 @@ document.querySelector(".loginForm").addEventListener("submit", function(event) 
                 return;
             }
 
-            
             // Store the token and userId in localStorage separately
             localStorage.setItem("token", token);
             localStorage.setItem("userId", loggedUserId);

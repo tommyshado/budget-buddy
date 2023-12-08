@@ -30,25 +30,21 @@ axios.get("/api/categories").then((result) => {
 
 // *******************************************************
 const userToken = localStorage.getItem('token'); // Retrieve the token from local storage
-console.log(userToken)
+
 axios.get('/api/products/user', {
     headers: {
-        'Authorization': `${userToken}` // Ensure to use 'Bearer'
+        'Authorization': `Bearer ${userToken}` // Use the retrieved token
     }
 })
 .then((response) => {
-    console.log("API Response:", response.data);
     const userProducts = response.data.data;
-    if (userProducts) {
-        updateBarChart(userProducts);
-    } else {
-        console.error("No user products data received");
-    }
+    console.log(userProducts);
+
+    updateBarChart(userProducts); // Update the chart with the fetched data
 })
 .catch((error) => {
     console.error("Error fetching user products:", error);
 });
-
 
 function updateBarChart(userProducts) {
     const data = {

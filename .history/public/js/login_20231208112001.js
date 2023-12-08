@@ -22,7 +22,6 @@ document.querySelector(".loginForm").addEventListener("submit", function(event) 
                 return;
             }
 
-            
             // Store the token and userId in localStorage separately
             localStorage.setItem("token", token);
             localStorage.setItem("userId", loggedUserId);

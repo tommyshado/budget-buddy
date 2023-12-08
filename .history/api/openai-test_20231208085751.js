@@ -130,16 +130,13 @@ router.get("/categories/user", verifyToken, async (req, res) => {
 
 router.get("/products/user", verifyToken, async (req, res) => {
     try {
-        console.log("User ID from token:", req.user.id);
         const userProducts = await productsService.productsUser(req.user.id);
 
-        console.log("User products fetched successfully:", userProducts);
         res.json({
             status: "success",
             data: userProducts,
         });
     } catch (err) {
-        console.error("Error in fetching user products:", err);
         res.json({
             status: "error",
             error: err.stack,
