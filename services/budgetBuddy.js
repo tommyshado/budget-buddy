@@ -57,7 +57,7 @@ const budgetBuddy = (db) => {
                     categories c ON p.category_id = c.category_id
                 WHERE 
                     up.user_id = $1;
-            `, [user_id]);
+            `, [3]);
         } catch (error) {
             console.error("Error in productsUser service:", error);
             throw error; // or handle it as needed

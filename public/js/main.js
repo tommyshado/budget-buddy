@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 const apiURL = "/api/preprocessData";
                 const data = {
                     text: text,
-                    categoryId: 3
+                    categoryId: 5
                 };
     
                 axios.post(apiURL, data).then(()=>{
