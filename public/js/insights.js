@@ -67,3 +67,5 @@ var sidewaysBarChart = new Chart(ctx, {
 
 });
 
+
+
