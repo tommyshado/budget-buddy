@@ -10,7 +10,6 @@ const SignupService = signupService(db);
 
 signupRouter.post("/user", async (req, res) => {
     try {
-     
         const { error } = signup(req.body);
         if (error) return res.status(400).json({ error: error.details[0].message });
 
@@ -21,23 +20,19 @@ signupRouter.post("/user", async (req, res) => {
             email: req.body.email,
             password: hashedPassword,
             categories: req.body.categories,
-            spendingLimit: parseInt(req.body.spendingLimit, 10) // Ensure this is a number
+            spendingLimit: req.body.spendingLimit,
         };
 
-        const newUser = await SignupService.createUser(user); // Corrected to pass only 'user'
+        const newUser = await SignupService.createUser(req, user); // Pass 'req' as well
 
-        // Assuming newUser returns the user object with user_id
-        if (newUser && newUser.user_id) {
-            req.session.userId = newUser.user_id; // Set session userId here
-            res.status(201).json({ status: "Successfully registered a user" });
-        } else {
-            throw new Error('User registration failed');
-        }
+        // Create a session for the newly registered user
+        req.session.userId = newUser.user_id; // Make sure 'newUser' contains 'user_id'
+
+        res.status(201).json({ status: "Successfully registered a user" });
     } catch (err) {
         res.status(500).json({ status: "Error registering user", error: err.stack });
     }
 });
-
 
 
 
