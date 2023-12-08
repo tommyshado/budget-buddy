@@ -8,7 +8,8 @@ const budgetAdvicePrompt = () => {
               that the person spends on and the categories these products fall into. Share 
               only the advice and tips and keep it 1 paragraphs. Advice them 
               like you are talking to them directly! Say only the things that matter. be formal
-              
+              and always start by saying the following words :Based on the products 
+              you purchased and the spending categories they fall into
               
               `;
     return {
