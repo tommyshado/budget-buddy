@@ -15,7 +15,6 @@ const registerUsers = (db) => {
         }
         
         try {
-            let createdUser;
             await db.tx(async t => {
                 // Check if email already exists
                 console.log("Checking for existing user with email:", email);
@@ -29,13 +28,13 @@ const registerUsers = (db) => {
                 console.log("Inserting user:", { username, email });
                 const userQuery = `INSERT INTO user_table (username, email, password_hash, spending_limit) VALUES ($1, $2, $3, $4) RETURNING user_id`;
                 const userData = [username.toLowerCase(), email.toLowerCase(), password, spendingLimit];
-                createdUser = await t.one(userQuery, userData);
-                console.log("User inserted:", createdUser);
+                const user = await t.one(userQuery, userData);
+                console.log("User inserted:", user);
 
-                // Convert category names to IDs with case-insensitive matching
+                // Convert category names to IDs
                 console.log("Converting categories to IDs for:", categories);
                 const categoryIds = await Promise.all(categories.map(async categoryName => {
-                    const category = await t.oneOrNone('SELECT category_id FROM categories WHERE LOWER(category_type) = LOWER($1)', [categoryName]);
+                    const category = await t.oneOrNone('SELECT category_id FROM categories WHERE category_type = $1', categoryName);
                     return category ? category.category_id : null;
                 }));
 
@@ -44,16 +43,15 @@ const registerUsers = (db) => {
                 console.log("Valid category IDs:", validCategoryIds);
 
                 // Insert categories into user_categories
-                console.log("Inserting categories into user_categories for user_id:", createdUser.user_id);
+                console.log("Inserting categories into user_categories for user_id:", user.user_id);
                 const categoryQueries = validCategoryIds.map(categoryId => {
-                    return t.none(`INSERT INTO user_categories (user_id, category_id) VALUES ($1, $2)`, [createdUser.user_id, categoryId]);
+                    return t.none(`INSERT INTO user_categories (user_id, category_id) VALUES ($1, $2)`, [user.user_id, categoryId]);
                 });
 
                 await t.batch(categoryQueries);
                 console.log("Categories successfully inserted");
             });
             console.log("User creation transaction completed");
-            return createdUser; // Return the created user object
         } catch (error) {
             console.error("Error in createUser:", error);
             throw error; // Rethrow the error for further handling

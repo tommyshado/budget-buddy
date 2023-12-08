@@ -10,7 +10,7 @@ const SignupService = signupService(db);
 
 signupRouter.post("/user", async (req, res) => {
     try {
-     
+        console.log(req.body);
         const { error } = signup(req.body);
         if (error) return res.status(400).json({ error: error.details[0].message });
 
